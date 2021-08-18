@@ -32,6 +32,5 @@ jobs:
 
       - name: Run Node test
         run: |
-#          node -p "require('prettier/package.json').version"
           npm install --global prettier@${{ steps.get_prettier_version }}
           make prettier-check
