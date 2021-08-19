@@ -18,19 +18,7 @@ jobs:
         with:
           node-version: 12.18.1
 
-      - name: Get Prettier Version From package.json
-        id: get_prettier_version
-        run: |
-          cd ./pkg/new-ui/v1beta1/frontend
-          content=`cat ./package.json`
-          # the following lines are only required for multi line json
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          # end of optional handling for multi line json
-          echo "${{ fromJson(content.devDependency.prettier) }}"
-
       - name: Run Node test
         run: |
-          npm install --global prettier@${{ steps.get_prettier_version }}
+          npm install prettier --prefix ./pkg/new-ui/v1beta1/frontend
           make prettier-check
